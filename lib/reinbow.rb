@@ -4,7 +4,7 @@ require_relative "./reinbow/painter.rb"
 
 module Reinbow
 
-    VERSION = "1.0.0"
+    VERSION = "1.1.0"
 
     refine String do
         Painter.instance_methods( false ).each do |name|
