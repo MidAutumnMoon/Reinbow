@@ -1,0 +1,32 @@
+name: Run RSpec
+
+on:
+    push:
+        branches: ['master']
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+
+    rspec:
+        runs-on: ubuntu-latest
+
+        matrix:
+            ruby: [ 3.3 ]
+
+        strategy:
+            fail-fast: false
+
+        steps:
+
+        -   name: Checkout
+            uses: actions/checkout@v4
+
+        -   name: Setup Ruby
+            uses: ruby/setup-ruby@v1
+            with:
+                ruby-version: ${{ matrix.ruby }}
+                bundler-cache: true
+
+        -   name: Run rspec
+            run: bundle exec rake spec
