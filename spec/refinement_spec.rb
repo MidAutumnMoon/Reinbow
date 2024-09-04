@@ -6,7 +6,7 @@ require "reinbow"
 
 module WithRefine
     using Reinbow
-    def self.blue_hello = "hello".blue.to_s
+    def self.blue_hello = "hello".blue.reinbow!.to_s
 end
 
 module WoRefine

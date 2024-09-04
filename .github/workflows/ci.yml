@@ -11,11 +11,10 @@ jobs:
     rspec:
         runs-on: ubuntu-latest
 
-        matrix:
-            ruby: [ 3.3 ]
-
         strategy:
             fail-fast: false
+            matrix:
+                ruby: [ 3.3 ]
 
         steps:
 

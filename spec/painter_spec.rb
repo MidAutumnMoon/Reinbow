@@ -8,7 +8,7 @@ Painter = Reinbow::Painter
 # Expected results should be verified visually.
 describe Painter do
 
-    subject { Painter.new( "lomn" ) }
+    subject { Painter.new( "lomn" ).reinbow! }
 
     it "is its own class" do
         expect( subject ).to be_a Painter
