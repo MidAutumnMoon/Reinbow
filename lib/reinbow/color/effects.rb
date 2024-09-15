@@ -33,12 +33,16 @@ module Reinbow
         invert: 7,
 
         # Conceal or hide
-        # (Windows Terminal do support this effect,
-        # a bit suprised)
         hide: 8,
 
         # Crossed-out, or strike
         strike: 9,
-    }.transform_values { Effect.new( _1 ) }
+
+        # Doubly underlined
+        double_underline: 21,
+
+        # Overlined
+        overline: 53,
+    }.transform_values { Effect.new( _1 ) }.freeze
 
 end

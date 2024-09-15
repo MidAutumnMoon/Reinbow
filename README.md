@@ -78,6 +78,8 @@ Full list of methods for applying terminal effects:
 * `#invert`
 * `#hide`
 * `#strike`
+* `#double_underline`
+* `#overline`
 
 Demo:
 
