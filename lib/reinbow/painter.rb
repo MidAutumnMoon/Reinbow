@@ -89,7 +89,7 @@ module Reinbow
                 ground = layer == :fg ? 38 : 48
                 @sgr_stack.push( "\e[#{ground};2;#{red};#{green};#{blue}m" )
             else
-                raise NotImplementedError, "Can't paint #{code.class}"
+                raise NotImplementedError, "Can't paint #{data.class}"
             end
 
             self
