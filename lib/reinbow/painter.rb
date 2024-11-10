@@ -14,7 +14,6 @@ module Reinbow
         # Accepts all parameters that String.new accepts.
         def initialize( input )
             @raw = input.to_s
-            @sgr_stack = []
 
             # Ref: https://bixense.com/clicolors/
             @enable = if ENV.key?( "NO_COLOR" )
@@ -25,14 +24,6 @@ module Reinbow
                           $stdout.tty?
                       end
         end
-
-        def reinbow? = @enable
-
-        def reinbow!( status = true )
-            @enable = status
-            self
-        end
-
 
         #
         # Define method for various color names
@@ -76,40 +67,27 @@ module Reinbow
             raise ArgumentError, "layer should be one of :fg, :bg or :effect" \
                 unless layer in :fg | :bg | :effect
 
+            sgr_code = nil
+
             case data
             in Effect
                 data => { code: }
-                @sgr_stack.push( "\e[#{code}m" )
+                sgr_code = "\e[#{code}m"
             in Ansi
                 data => { raw_code: }
                 code =  raw_code + ( layer == :fg ? 30 : 40 )
-                @sgr_stack.push( "\e[#{code}m" )
+                sgr_code = "\e[#{code}m"
             in Rgb
                 data => { red:, green:, blue: }
                 ground = layer == :fg ? 38 : 48
-                @sgr_stack.push( "\e[#{ground};2;#{red};#{green};#{blue}m" )
+                sgr_code = "\e[#{ground};2;#{red};#{green};#{blue}m"
             else
                 raise NotImplementedError, "Can't paint #{data.class}"
             end
 
-            self
+            "#{sgr_code}#{@raw}" \
+                + ( @raw.end_with?( "\e[0m" ) ? "" : "\e[0m" )
         end
-
-
-        #
-        # String behaviours
-        #
-
-        def to_s
-            if @enable
-                sgr = @sgr_stack.join( nil )
-                "#{sgr}#{@raw}\e[0m"
-            else
-                @raw
-            end
-        end
-
-        def +( other ) = to_s + other.to_s
 
     end
 
