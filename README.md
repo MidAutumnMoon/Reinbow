@@ -1,5 +1,11 @@
 # Reinbow
 
+---
+
+⚠️ Archived (2025-11-08), the author decided to not use Ruby anymore.
+
+---
+
 ![Gem Version](https://img.shields.io/gem/v/reinbow?style=for-the-badge&label=gem%20version)
 
 Reinbow is a Ruby gem for colorizing printed text on terminal.
